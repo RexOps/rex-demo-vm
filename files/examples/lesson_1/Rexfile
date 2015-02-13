@@ -1,0 +1,11 @@
+use Rex -feature => ['1.0'];
+
+user "root";
+password "box";
+
+group servers => "localhost";
+
+task "setup", group => "servers", sub {
+  my $output = run "uptime";
+  say $output;
+};

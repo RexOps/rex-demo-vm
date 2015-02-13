@@ -1,0 +1,9 @@
+type: VBox
+vms:
+  rex-demo:
+    url: http://box.linux-files.org/centos-7-amd64.ova
+    network:
+      1:
+        type: bridged
+        bridge: eth0
+    setup: setup_demo
