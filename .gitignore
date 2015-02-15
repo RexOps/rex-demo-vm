@@ -24,3 +24,4 @@ vars.db
 vars.db.lock
 tmp
 Rexfile.lock
+storage

@@ -18,14 +18,20 @@ task setup_demo => sub {
     ensure   => "present",
     password => "rex";
 
-  pkg [ "libterm-menu-perl", "wget" ],
-    ensure => "present";
-
-  file "/etc/apt/sources.list.d/rex.list",
-    source => "files/etc/apt/rex.list",
+  file "/etc/yum.repos.d/rex.repo",
+    source => "files/etc/yum.repos.d/rex.repo",
     owner  => "root",
     group  => "root",
     mode   => 644;
+
+  run "import-rex-gpg-key",
+    command => "rpm --import http://rex.linux-files.org/RPM-GPG-KEY-REXIFY-REPO.CENTOS6";
+
+  pkg [ "wget", "rex", "perl-App-cpanminus" ],
+    ensure => "latest";
+
+  run "install-term-menu",
+    command => "cpanm -n Term::Menu";
 
   file "/etc/issue",
     source => "files/etc/issue",
@@ -51,6 +57,12 @@ task setup_demo => sub {
 
   file "/home/rex/lessons.pl",
     source => "files/lessons.pl",
+    owner  => "rex",
+    group  => "rex",
+    mode   => 755;
+
+  file "/home/rex/lessons",
+    ensure => "directory",
     owner  => "rex",
     group  => "rex",
     mode   => 755;

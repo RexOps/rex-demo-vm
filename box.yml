@@ -1,9 +1,8 @@
-type: VBox
+type: KVM
 vms:
   rex-demo:
-    url: http://box.linux-files.org/centos-7-amd64.ova
+    url: http://box.linux-files.org/centos-7-amd64.img.gz
     network:
       1:
-        type: bridged
-        bridge: eth0
+        name: default
     setup: setup_demo
