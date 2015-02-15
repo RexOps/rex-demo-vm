@@ -2,7 +2,7 @@ print_header("Lesson 2 - Managing services");
 
 h1("Events");
 
-p("Many resources fire on_change events on which you can interact and run custom actions. For example if a package gets updated or a configuration file gets changed you want to restart the service.");
+p("Many resources fire on_change events on which you can interact and run custom actions. For example, if a package gets updated or a configuration file gets changed, you would want to restart the service.");
 
 code(q~  pkg "ntp",
     ensure    => "latest",
