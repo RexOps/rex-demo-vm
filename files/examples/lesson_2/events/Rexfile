@@ -1,0 +1,22 @@
+use Rex -feature => ['1.0'];
+
+user "root";
+password "box";
+
+group servers => "localhost";
+
+task "setup", group => "servers", sub {
+  pkg "ntp",
+    ensure    => "latest",
+    on_change => sub { service "ntp", "restart"; };
+
+  file "/etc/ntp.conf",
+    source    => "files/etc/ntp.conf",
+    owner     => "root",
+    group     => "root",
+    mode      => 644,
+    on_change => sub { service "ntp", "restart"; };
+
+  service "ntp",
+    ensure => "started";
+};
